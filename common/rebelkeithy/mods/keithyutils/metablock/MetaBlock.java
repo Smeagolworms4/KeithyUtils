@@ -34,7 +34,13 @@ public class MetaBlock extends Block {
 	
 	//public static SubBlock air = new SubBlock(0, 0, "").setHardness(0).setResistance(0);
 	
+	@Deprecated
 	public static void registerID(int id)
+	{
+		MetaBlock.registerID (id, null);
+	}
+	
+	public static void registerID(int id, String name)
 	{
 		if(registeredIDs == null)
 			registeredIDs = Lists.newArrayList();
@@ -45,7 +51,6 @@ public class MetaBlock extends Block {
 		Block block = Block.blocksList[id];
 		if(block instanceof MetaBlock)
 		{
-
 			GameRegistry.registerBlock(block, ItemMetaBlock.class, "KeithyUtils:" +  block.getUnlocalizedName());
 			registeredIDs.add(id);
 		}
