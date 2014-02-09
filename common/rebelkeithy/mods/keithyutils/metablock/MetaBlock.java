@@ -27,8 +27,9 @@ public class MetaBlock extends Block {
 	SubBlock[] subBlocks;
 	List<Integer> tickList;
 	ArrayList<CreativeTabs> tabs;
-	
+
 	public static List registeredIDs;
+	public static List registeredNames = new ArrayList<String>();
 	
 	//public static SubBlock air = new SubBlock(0, 0, "").setHardness(0).setResistance(0);
 	
@@ -43,7 +44,16 @@ public class MetaBlock extends Block {
 		Block block = Block.blocksList[id];
 		if(block instanceof MetaBlock)
 		{
-			GameRegistry.registerBlock(block, ItemMetaBlock.class, "KeithyUtils:" +  block.getUnlocalizedName());
+			String name = "KeithyUtils:" +  block.getUnlocalizedName();
+			if (registeredNames.contains(name)) {
+				int i = 1;
+				while (registeredNames.contains(name+":"+i)) {
+					i++;
+				}
+				name += ":"+i;
+			}
+			registeredNames.add(name);
+			GameRegistry.registerBlock(block, ItemMetaBlock.class, name);
 			registeredIDs.add(id);
 		}
 	}
